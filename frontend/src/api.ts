@@ -67,12 +67,9 @@ export interface WelcomeEmailResponse {
   status: 'sent' | 'skipped';
   message: string;
 }
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ||
-  'https://ai-merchant-growth-agent-api.onrender.com';
+
 async function apiFetch<T>(url: string, options?: RequestInit): Promise<T> {
-  
-  const res = await fetch(`${API_BASE_URL}${url}`, options);
+  const res = await fetch(url, options);
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     throw new Error(body.detail ?? `HTTP ${res.status}`);
